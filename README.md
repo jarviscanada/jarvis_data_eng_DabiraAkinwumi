@@ -1,6 +1,6 @@
 
 
-# Introduction
+## Introduction
 
 For this project I implemnted a program to that monitors the usage of computers within a linux cluster. The code for the project was written in a bash script, other technolgies used were git,postgresql and docker.
 
@@ -117,7 +117,7 @@ I tested the ddl.sql file by executing it on the host\_agent database against th
 ## Deployment
 All the code is on github. The psql instance is hosted on docker and crontab is used to automate running the scripts
 
-##Improvements
+## Improvements
 
 - more indepth log reports
 - automatic alerts when usage is too high
