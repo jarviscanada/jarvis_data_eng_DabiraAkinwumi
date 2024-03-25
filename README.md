@@ -4,7 +4,8 @@
 
 For this project I implemnted a program to that monitors the usage of computers within a linux cluster. The code for the project was written in a bash script, other technolgies used were git,postgresql and docker.
 
-#Quickstart
+
+## Quick start commands
 To start the project, execute the followig code:
 
 In order to create and start a psql instance with docker:
@@ -37,19 +38,19 @@ Within your bash shell run:
 bash -e
 
 ```
-Paste the following command in your cron tab:
-#make sure you are using the correct file path
+Paste the following command in your cron tab
+(make sure you are using the correct file path)
 ```
 * * * * * bash /home/centos/dev/jrvs/bootcamp/linux_sql/host_agent/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log
 ```
 
-#Implementation
+## Implementation
 
 The backend of this project was implemented using psql, so all the usage and specs data are stored in sql tables. For the sake of this project two tables are needed, one table to store the specs data and one to store the usage data. Docker was used to provision the psql tables. The actual code that inserts all the data and runs all the commands is done using a bash script. Finally cron is used to automate the running of the usage script, so every minute it runs the host usage script which checks the usage data and subsequently inserts it into the appropriate sql table.
 
 
-#Scripts
-psql\_docker.sh: This script is used to either create, start or stop  an instance of psql using docker
+## Scripts
+#### psql\_docker.sh: This script is used to either create, start or stop  an instance of psql using docker
 Usage
 ```
 ./scripts/psql_docker.sh create db_username db_password
@@ -66,26 +67,24 @@ Usage
 
 ```
 
-host\_info.sh: This script collects hardware specification data and then inserts the data into the psql instance. We assume the hardware specifications is static so ideally this script will be executed only once.
+#### host\_info.sh: This script collects hardware specification data and then inserts the data into the psql instance. We assume the hardware specifications is static so ideally this script will be executed only once.
 Usage:
 ```
 bash scripts/host_info.sh psql_host psql_port db_name psql_user psql_password
 
 ```
 
-host\_usage.sh: This script collects server usage data and then inserts the data into the psql database. This script will be executed every minute using Linux's crontab program.
+#### host\_usage.sh: This script collects server usage data and then inserts the data into the psql database. This script will be executed every minute using Linux's crontab program.
 
 ```
 bash scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password
 
 ```
 
-#Database Modeling
+## Database Modeling
 
-```
-host_info table
+#### host\_info table
 
-```
 |column | description| data type|
 |-------|------------|---------------------------------|
 | id    | unique id for each row in the host info table| serial|
@@ -98,10 +97,10 @@ host_info table
 |total\_mem | the total memory capacity of the cpu| int4|
 |timestamp | time in which the data was inserted into psql | timestamp |
 
-```
-host_usage table
 
-```
+#### host\_usage table
+
+
 |column| description| data type|
 |------|------------|----------|
 | timestamp | time data was inserted into the table | timestamp|
@@ -112,12 +111,14 @@ host_usage table
 | disk\_available | number of disk space available | int4 |
 
 
-#Test
+## Test
 I tested the ddl.sql file by executing it on the host\_agent database against the psql instance and then checking the corresponding sql tables to make sure the data was entered properly.
 
-# Deployment
+## Deployment
 All the code is on github. The psql instance is hosted on docker and crontab is used to automate running the scripts
-#Improvements
+
+##Improvements
+
 - more indepth log reports
 - automatic alerts when usage is too high
 - a user interface
