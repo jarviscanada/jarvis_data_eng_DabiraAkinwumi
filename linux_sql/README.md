@@ -51,7 +51,7 @@ The backend of this project was implemented using psql, so all the usage and spe
 
 ## Architecture
 
-![architecture] (assets/architecture.jpg)
+![architecture] (./assets/architecture.jpg)
 
 ## Scripts
 #### psql\_docker.sh: This script is used to either create, start or stop  an instance of psql using docker
